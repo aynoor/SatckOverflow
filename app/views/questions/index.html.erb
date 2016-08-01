@@ -1,0 +1,16 @@
+<% content_for :top_content do %>
+  <div class="jumbotron">
+    <div class="container">
+      <h3>Questions</h3>
+
+      <%= will_paginate %>
+
+      <ul class = "questions">
+      	<%= render @questions %>
+      </ul>
+
+      <%= will_paginate %>
+
+    </div>
+  </div>
+<% end %>
