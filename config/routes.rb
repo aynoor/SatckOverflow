@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   get 'questions/index'
 
   devise_for :users
+  resources :questions
   root to: 'questions#index'
   get '/secret', to: 'pages#secret', as: :secret
+  get '/new', to: 'questions#new', as: :new
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

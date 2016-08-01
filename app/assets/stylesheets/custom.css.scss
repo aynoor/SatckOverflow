@@ -41,10 +41,10 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 1.3em;
   letter-spacing: -1px;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
   font-weight: normal;
   color: $gray-light;
 }
@@ -52,6 +52,15 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; 
 }
 
 
@@ -140,7 +149,7 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid #ccc;;
   }
 }
 

@@ -1,0 +1,18 @@
+<% provide(:title, 'Ask Question!') %>
+<h1>Post Question</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@question) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :description %>
+      <%= f.text_field :description, class: 'form-control' %>
+
+      <%= f.label :explanation %>
+      <%= f.text_field :explanation, class: 'form-control' %>
+
+      <%= f.submit "Post Question", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
