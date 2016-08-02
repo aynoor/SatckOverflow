@@ -1,5 +1,5 @@
-<% provide(:title, 'Ask Question!') %>
-<h1>Post Question</h1>
+<% provide(:title, "Edit question") %>
+<h1>Update your question</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -12,7 +12,7 @@
       <%= f.label :explanation %>
       <%= f.text_area :explanation, cols: "30", rows: "7", class: 'form-control' %>
 
-      <%= f.submit "Post Question", class: "btn btn-primary" %>
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

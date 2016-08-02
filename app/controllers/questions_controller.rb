@@ -9,12 +9,8 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    if user_signed_in?
-      @question = Question.new  
-    else
-      render 'index'
-    end
-    #authorize! :new, @question
+    @question = Question.new  
+    authorize! :new, @question
   end
 
   def create
@@ -22,11 +18,33 @@ class QuestionsController < ApplicationController
     @question.user_id = current_user.id
     if @question.save
       flash[:success] = "Question posted."
-      redirect_to action: :index
+      redirect_to @question
     else
       render 'new'
     end
-    #authorize! :create, @question            #not needed?
+  end
+
+  def edit
+    @question = Question.find(params[:id])
+    authorize! :update, @question
+  end
+
+  def update
+    @question = Question.find(params[:id])
+    if @question.update_attributes(question_params)
+      flash[:success] = "Quetion updated!"
+      redirect_to @question
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    authorize! :destroy, @question
+    Question.find(params[:id]).destroy
+    flash[:success] = "Question deleted"
+    redirect_to root_url
   end
 
   private

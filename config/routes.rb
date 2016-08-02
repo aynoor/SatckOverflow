@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :questions
   root to: 'questions#index'
-  get '/secret', to: 'pages#secret', as: :secret
-  get '/new', to: 'questions#new', as: :new
+  #get '/secret',      to: 'pages#secret', as: :secret
+  get '/question/destroy/:id',      to: 'questions#destroy', as: :destroy_question
+  #get '/new',         to: 'questions#new', as: :new
+  #get '/questions/edit/:id',      to: 'questions#edit', as: :edit_question
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

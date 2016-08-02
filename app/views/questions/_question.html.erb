@@ -1,3 +1,9 @@
 <li>
 	<%= link_to question.description, question %>
+	<% if can? :update, question %>
+    |  <%= link_to "edit", edit_question_path(question.id) %>
+  <% end %>
+  
 </li>
+
+<!-- why question and not @question? -->
