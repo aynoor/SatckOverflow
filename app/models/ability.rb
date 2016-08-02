@@ -15,6 +15,8 @@ class Ability
         #can :manage, Question
         can :create, Question
         can [:update, :destroy], [Question], user_id: user.id 
+        can [:upvote, :downvote], [Question]
+        cannot [:upvote, :downvote], [Question], user_id: user.id
           #can :update, Question, user_id: @user.id
       end
     end
