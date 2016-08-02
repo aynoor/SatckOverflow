@@ -11,7 +11,7 @@
   			</div>
   			<div class = "col-md-4", id = "upvotes">
   				<%= link_to "", dislike_question_path(@question), method: :put, 
-	    		class: "btn btn-sm btn-default", class: "glyphicon glyphicon-thumbs-down" %>
+	    		class: "btn btn-sm btn-default", class: "glyphicon glyphicon-thumbs-down", remote: true %>
   			</div>
   			<div class = "col-md-4", id = "downvotes">
   				<%= @question.total_downvotes %>

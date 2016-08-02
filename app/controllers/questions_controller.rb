@@ -51,17 +51,18 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     authorize! :upvote, @question
     @question.upvote_by current_user
-    redirect_to  @question 
-    #respond_to do |format|
-    #  format.js   { render :layout => false }
-    #end
+    respond_to do |format|
+      format.js   { render :layout => false }
+    end
   end
 
   def downvote
     @question = Question.find(params[:id])
     authorize! :downvote, @question
     @question.downvote_by current_user
-    redirect_to  @question 
+    respond_to do |format|
+      format.js   { render :layout => false }
+    end
   end
 
   private
