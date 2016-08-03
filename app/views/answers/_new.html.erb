@@ -1,0 +1,12 @@
+<div class="col-md-6">
+	<%= form_for @answer, remote: true do |f| %>
+
+	<%= f.label :answer %>
+	<%= f.text_area :ans_description, cols: "100", rows: "10", class: 'form-control' %>
+
+	<%= link_to "Submit", "#", class: "btn btn-primary" %>
+	<% end %>
+</div>
+
+
+

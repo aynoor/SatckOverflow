@@ -6,6 +6,8 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @answers = @question.answers.paginate(page: params[:page], per_page: 10)
+    @answer = Answer.new
   end
 
   def new

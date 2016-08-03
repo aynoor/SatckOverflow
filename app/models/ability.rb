@@ -10,6 +10,8 @@ class Ability
     else
       if user.admin?
         can :manage, :all
+        can :destroy, Question, user_id: user.id
+        #cannot :destroy, Question
       else
         #can :update, @Question, :question.user_id => user.id
         #can :manage, Question

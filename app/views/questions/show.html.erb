@@ -36,4 +36,13 @@
   		</div>
   	</div>
   </div>
+  <div class = "container">
+  	 <%= render partial: '/answers/index' %>
+  </div>
+  <hr>
+  <%= link_to "Answer", new_answer_path, class: "btn btn-primary", remote: true %>
+  <div class="container", id = "answer">  </div>
 </div>
+
+
+

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  get 'answers/show'
+
   get 'questions/index'
 
   devise_for :users
+  resources :answers
   resources :questions do 
     member do
       put "like",    to: "questions#upvote"
@@ -11,6 +14,7 @@ Rails.application.routes.draw do
   root to: 'questions#index'
 
   get '/question/destroy/:id',      to: 'questions#destroy', as: :destroy_question
+  get '/answer/:id',      to: 'answers#create', as: :create_answer
   
 
   # The priority is based upon order of creation: first created -> highest priority.
