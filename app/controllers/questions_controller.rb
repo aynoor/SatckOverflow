@@ -6,19 +6,16 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answers = @question.answers.paginate(page: params[:page], per_page: 10)
-    @answer = Answer.new
+    @answers = @question.answers.paginate(page: params[:page], per_page: 5)
   end
 
   def new
     @question = current_user.questions.build
-    @question.answers = Array.new 
     authorize! :new, @question
   end
 
   def create
     @question = current_user.questions.build(question_params)
-    #@question.user_id = current_user.id
     if @question.save
       flash[:success] = "Question posted."
       redirect_to @question
@@ -58,6 +55,12 @@ class QuestionsController < ApplicationController
   def downvote
     authorize! :downvote, @question
     @question.downvote_by current_user
+    respond_to do |format|
+      format.js   { render :layout => false }
+    end
+  end
+
+  def score
     respond_to do |format|
       format.js   { render :layout => false }
     end

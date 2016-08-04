@@ -14,6 +14,6 @@ class Question < ActiveRecord::Base
   end
 
   belongs_to :user
-  validates :description, presence: true
   has_many :answers, dependent: :destroy
+  validates :description, presence: true
 end

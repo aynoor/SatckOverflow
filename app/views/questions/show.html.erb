@@ -4,14 +4,14 @@
   	<div class = "col-md-1">
   			<div class = "col-md-4">
   				<%= link_to "", like_question_path(@question), method: :put, 
-  				class: "btn btn-sm btn-default", class: "glyphicon glyphicon-thumbs-up", remote: true %>
+  				class: "btn btn-sm btn-default", class: "glyphicon glyphicon-triangle-top", remote: true %>
   			</div>
   			<div class = "col-md-4", id = "upvotes">
   				<%= @question.total_upvotes %>
   			</div>
   			<div class = "col-md-4", id = "upvotes">
   				<%= link_to "", dislike_question_path(@question), method: :put, 
-	    		class: "btn btn-sm btn-default", class: "glyphicon glyphicon-thumbs-down", remote: true %>
+	    		class: "btn btn-sm btn-default", class: "glyphicon glyphicon-triangle-bottom", remote: true %>
   			</div>
   			<div class = "col-md-4", id = "downvotes">
   				<%= @question.total_downvotes %>
@@ -21,6 +21,7 @@
   		<div class="container">
   			<div class = "col-md-10">
   				<h3>  <%= @question.description %>  </h3>
+          <p> by <%= @question.user.name %> </p>
   			</div> 
   			<div class = "col-md-2">
   				<% if can? :destroy, @question %>
@@ -36,13 +37,16 @@
   		</div>
   	</div>
   </div>
-  <div class = "container">
-  	 <%= render partial: '/answers/index' %>
-  </div>
   <hr>
-  <div class="container", id = "answer">  
-  	<%= render partial: '/answers/new' %>
+  <div class = "container">
+    <h4> <%= pluralize(@question.answers.count, "Answer") %> </h4>
+    <%= render partial: '/answers/index' %>
   </div>
+  <% if user_signed_in? %>
+    <%= render partial: '/answers/form' %>
+  <% end %>
+  <br>
+  <div class="container", id = "answer_error_msgs"></div>
 </div>
 
 
