@@ -21,7 +21,6 @@
   		<div class="container">
   			<div class = "col-md-10">
   				<h3>  <%= @question.description %>  </h3>
-          <p> by <%= @question.user.name %> </p>
   			</div> 
   			<div class = "col-md-2">
   				<% if can? :destroy, @question %>
@@ -33,6 +32,7 @@
   		<div class = "container">
   			<div class = "col-md-10">
   				<p> <%= @question.explanation %> </p>
+          <p id = "author_name"> by <%= @question.user.name %> </p>
   			</div>
   		</div>
   	</div>
@@ -42,9 +42,11 @@
     <h4> <%= pluralize(@question.answers.count, "Answer") %> </h4>
     <%= render partial: '/answers/index' %>
   </div>
-  <% if user_signed_in? %>
-    <%= render partial: '/answers/form' %>
-  <% end %>
+  <div id = "answer_form">
+    <% if user_signed_in? %>
+      <%= render partial: '/answers/form' %>
+    <% end %>
+  </div>
   <br>
   <div class="container", id = "answer_error_msgs"></div>
 </div>

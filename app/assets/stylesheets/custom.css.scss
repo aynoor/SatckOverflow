@@ -10,6 +10,7 @@ $gray-medium-light: #eaeaea;
 
 body {
   padding-top: 0px;
+  background-color: #f2f2f2;
 }
 
 section {
@@ -27,6 +28,7 @@ textarea {
     margin-bottom: 10px;
   }
 }
+
 
 /* typography */
 
@@ -48,6 +50,10 @@ h2 {
   text-align: left;
   font-weight: normal;
   color: $gray-light;
+}
+
+h3 {
+  font-size: 2.0em;
 }
 
 p {
@@ -81,6 +87,7 @@ hr {
     text-decoration: none;
   }
 }
+
 
 /* footer */
 
@@ -161,3 +168,29 @@ input {
 .alert-notice {
   @extend .alert-info;
 }
+
+/* header navbar */
+
+.navbar-inverse {
+    background-color:#000;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.jumbotron {
+  background-color:#f2f2f2;
+}
+
+#answer_count {
+  font-size: 15px;
+}
+
+#question_description {
+  font-size: 18px;
+}
+
+#author_name {
+  font-style: italic;
+  margin-left: 820px;
+}
+
