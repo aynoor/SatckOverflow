@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root to: 'questions#index'
 
   get '/question/destroy/:id',      to: 'questions#destroy', as: :destroy_question
-  get '/answer/:id',      to: 'answers#create', as: :create_answer
+  post '/answer/:id',      to: 'answers#create', as: :create_answer
   
 
   # The priority is based upon order of creation: first created -> highest priority.

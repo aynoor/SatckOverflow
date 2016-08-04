@@ -30,6 +30,8 @@ gem 'delayed_job_active_record'
 gem 'will_paginate',           '3.0.7'
 gem 'cancancan', '~> 1.10'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'pry-rails', :group => :development
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

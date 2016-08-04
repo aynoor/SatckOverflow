@@ -1,10 +1,11 @@
 <div class="col-md-6">
-	<%= form_for @answer, remote: true do |f| %>
+	<%= form_for @question.answers.new, :url => { :action => "create", :controller => "answers" }, remote: true do |f| %>
+		<%= render 'shared/error_messages' %>
 
-	<%= f.label :answer %>
-	<%= f.text_area :ans_description, cols: "100", rows: "10", class: 'form-control' %>
+		<%= f.label :ans_description %>
+		<%= f.text_area :ans_description, cols: "100", rows: "10", class: 'form-control' %>
 
-	<%= link_to "Submit", "#", class: "btn btn-primary" %>
+		<%= f.submit "Submit", class: "btn btn-primary" %>
 	<% end %>
 </div>
 

@@ -1,23 +1,24 @@
 class QuestionsController < ApplicationController
+  before_action :find_post, only: [:show, :edit, :update, :destroy, :downvote, :upvote]
 
   def index
     @questions = Question.paginate(page: params[:page], per_page: 10)
   end
 
   def show
-    @question = Question.find(params[:id])
     @answers = @question.answers.paginate(page: params[:page], per_page: 10)
     @answer = Answer.new
   end
 
   def new
-    @question = Question.new  
+    @question = current_user.questions.build
+    @question.answers = Array.new 
     authorize! :new, @question
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.user_id = current_user.id
+    @question = current_user.questions.build(question_params)
+    #@question.user_id = current_user.id
     if @question.save
       flash[:success] = "Question posted."
       redirect_to @question
@@ -27,12 +28,10 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question = Question.find(params[:id])
     authorize! :update, @question
   end
 
   def update
-    @question = Question.find(params[:id])
     if @question.update_attributes(question_params)
       flash[:success] = "Quetion updated!"
       redirect_to @question
@@ -42,15 +41,13 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find(params[:id])
     authorize! :destroy, @question
-    Question.find(params[:id]).destroy
+    Question.find(params[:id]).destroy    #@question.destroy
     flash[:success] = "Question deleted"
     redirect_to root_url
   end
 
   def upvote
-    @question = Question.find(params[:id])
     authorize! :upvote, @question
     @question.upvote_by current_user
     respond_to do |format|
@@ -59,7 +56,6 @@ class QuestionsController < ApplicationController
   end
 
   def downvote
-    @question = Question.find(params[:id])
     authorize! :downvote, @question
     @question.downvote_by current_user
     respond_to do |format|
@@ -69,6 +65,9 @@ class QuestionsController < ApplicationController
 
   private
 
+  def find_post 
+    @question = Question.find(params[:id])
+  end 
   def question_params
     params.require(:question).permit(:description, :explanation)
   end

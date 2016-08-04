@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
   end
 
   def new
-    @answer = Answer.new  
+    @answer = Answer.new 
     respond_to do |format|
       format.js   { render :layout => false }
     end
@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.new(answer_params)
-    @answer.question_id = params[:id]
+    binding.pry
     if @answer.save
       flash[:success] = "Answer posted."
       redirect_to @question
@@ -29,7 +29,7 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:ans_description)
+    params.require(:answer).permit(:ans_description, :question_id, :user_id)
   end
 
 end
