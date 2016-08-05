@@ -1,3 +1,33 @@
-<li>
-	<p> <%= answer.content %> </p>
-</li>
+<div class="container">
+	<div class = "col-md-1">
+		<div class = "col-md-4">
+			<% if can? :upvote, answer %>
+				<%= link_to "", upvote_question_answer_path(answer.question, answer), method: :put, 
+				class: "glyphicon glyphicon-triangle-top", remote: true %>
+			<% else %>
+				<span class="glyphicon glyphicon-triangle-top"></span>
+			<% end %>
+		</div>
+		<div class = "col-md-4", id = "upvotes_ans">
+			<%= answer.total_upvotes %>
+		</div>
+		<div class = "col-md-4">
+			<% if can? :downvote, answer %>
+				<%= link_to "", downvote_question_answer_path(answer.question, answer), method: :put, 
+				class: "glyphicon glyphicon-triangle-bottom", remote: true %>
+			<% else %>
+				<span class="glyphicon glyphicon-triangle-bottom"></span>
+			<% end %>
+		</div>
+		<div class = "col-md-4", id = "downvotes_ans">
+			<%= answer.total_downvotes %>
+		</div>
+	</div>
+  	<div class = "col-md-11">
+  		<div class = "container">
+  			<p> <%= answer.content %> </p>
+  			<p id = "author_name"> by <%= answer.user.name %> </p>
+  		</div>
+  	</div>
+  </div>
+</div>

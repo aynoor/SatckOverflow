@@ -1,8 +1,9 @@
 class QuestionsController < ApplicationController
-  before_action :find_post, only: [:show, :edit, :update, :destroy, :downvote, :upvote]
+  #skip authentication
+  load_and_authorize_resource
 
   def index
-    @questions = Question.paginate(page: params[:page], per_page: 10)
+    @questions = @questions.paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -11,7 +12,6 @@ class QuestionsController < ApplicationController
 
   def new
     @question = current_user.questions.build
-    authorize! :new, @question
   end
 
   def create
@@ -24,10 +24,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def edit
-    authorize! :update, @question
-  end
-
   def update
     if @question.update_attributes(question_params)
       flash[:success] = "Quetion updated!"
@@ -38,14 +34,12 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @question
-    Question.find(params[:id]).destroy    #@question.destroy
+    @question.destroy
     flash[:success] = "Question deleted"
     redirect_to root_url
   end
 
   def upvote
-    authorize! :upvote, @question
     @question.upvote_by current_user
     respond_to do |format|
       format.js   { render :layout => false }
@@ -53,24 +47,14 @@ class QuestionsController < ApplicationController
   end
 
   def downvote
-    authorize! :downvote, @question
     @question.downvote_by current_user
     respond_to do |format|
       format.js   { render :layout => false }
     end
   end
 
-  def score
-    respond_to do |format|
-      format.js   { render :layout => false }
-    end
-  end
-
   private
-
-  def find_post 
-    @question = Question.find(params[:id])
-  end 
+ 
   def question_params
     params.require(:question).permit(:description, :explanation)
   end

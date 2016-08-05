@@ -3,15 +3,23 @@
   <div class="container">
   	<div class = "col-md-1">
   			<div class = "col-md-4">
-  				<%= link_to "", like_question_path(@question), method: :put, 
-  				class: "btn btn-sm btn-default", class: "glyphicon glyphicon-triangle-top", remote: true %>
+          <% if can? :upvote, @question %>
+    				<%= link_to "", like_question_path(@question), method: :put, 
+    				 class: "glyphicon glyphicon-triangle-top", remote: true %>
+          <% else %>
+            <span class="glyphicon glyphicon-triangle-top"></span>
+          <% end %>
   			</div>
   			<div class = "col-md-4", id = "upvotes">
   				<%= @question.total_upvotes %>
   			</div>
   			<div class = "col-md-4", id = "upvotes">
-  				<%= link_to "", dislike_question_path(@question), method: :put, 
-	    		class: "btn btn-sm btn-default", class: "glyphicon glyphicon-triangle-bottom", remote: true %>
+          <% if can? :downvote, @question %>
+            <%= link_to "", dislike_question_path(@question), method: :put, 
+             class: "glyphicon glyphicon-triangle-bottom", remote: true %>
+          <% else %>
+            <span class="glyphicon glyphicon-triangle-bottom"></span>
+          <% end %>
   			</div>
   			<div class = "col-md-4", id = "downvotes">
   				<%= @question.total_downvotes %>
@@ -43,7 +51,7 @@
     <%= render partial: '/answers/index' %>
   </div>
   <div id = "answer_form">
-    <% if user_signed_in? %>
+    <% if can? :create, Answer %>
       <%= render partial: '/answers/form' %>
     <% end %>
   </div>

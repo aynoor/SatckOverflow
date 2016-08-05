@@ -2,11 +2,15 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :questions do 
-    resources :answers
+    resources :answers, only: :create do
+      member do
+        put "upvote"
+        put "downvote"
+      end
+    end
     member do
       put "like",    to: "questions#upvote"
       put "dislike", to: "questions#downvote"
-      put "score",   to: "questions#score"
     end
   end
 
