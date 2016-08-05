@@ -13,7 +13,7 @@
   			<div class = "col-md-4", id = "upvotes">
   				<%= @question.total_upvotes %>
   			</div>
-  			<div class = "col-md-4", id = "upvotes">
+  			<div class = "col-md-4">
           <% if can? :downvote, @question %>
             <%= link_to "", dislike_question_path(@question), method: :put, 
              class: "glyphicon glyphicon-triangle-bottom", remote: true %>

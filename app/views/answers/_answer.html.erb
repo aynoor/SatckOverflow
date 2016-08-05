@@ -8,7 +8,7 @@
 				<span class="glyphicon glyphicon-triangle-top"></span>
 			<% end %>
 		</div>
-		<div class = "col-md-4", id = "upvotes_ans">
+		<div class = "col-md-4", id =  <%= "upvotes_ans_" + answer.id.to_s %> >
 			<%= answer.total_upvotes %>
 		</div>
 		<div class = "col-md-4">
@@ -19,7 +19,7 @@
 				<span class="glyphicon glyphicon-triangle-bottom"></span>
 			<% end %>
 		</div>
-		<div class = "col-md-4", id = "downvotes_ans">
+		<div class = "col-md-4", id = <%= "downvotes_ans_" + answer.id.to_s %> >
 			<%= answer.total_downvotes %>
 		</div>
 	</div>

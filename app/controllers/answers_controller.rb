@@ -19,16 +19,13 @@ class AnswersController < ApplicationController
   def upvote
     @answer = Answer.find(params[:id])
     @answer.upvote_by current_user
-    respond_to do |format|
-      format.js   { render :layout => false }
-    end
+    
   end
 
   def downvote
+    @answer = Answer.find(params[:id])
     @answer.downvote_by current_user
-    respond_to do |format|
-      format.js   { render :layout => false }
-    end
+    
   end
 
 end
