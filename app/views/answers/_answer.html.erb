@@ -1,7 +1,6 @@
 <div class="container">
 	<% if can? :upvote, answer %>
-		<%= link_to "", upvote_question_answer_path(answer.question, answer), method: :put, 
-		class: "glyphicon glyphicon-thumbs-up", remote: true %>
+		<%= link_to "", upvote_question_answer_path(answer.question, answer), method: :put, class: "glyphicon glyphicon-thumbs-up", remote: true %>
 	<% else %>
 		<span class="glyphicon glyphicon-thumbs-up"></span>
 	<% end %>
@@ -9,8 +8,7 @@
 		<%= answer.total_upvotes %>
 	</span>
 	<% if can? :downvote, answer %>
-		<%= link_to "", downvote_question_answer_path(answer.question, answer), method: :put, 
-		class: "glyphicon glyphicon-thumbs-down", remote: true %>
+		<%= link_to "", downvote_question_answer_path(answer.question, answer), method: :put, class: "glyphicon glyphicon-thumbs-down", remote: true %>
 	<% else %>
 		<span class="glyphicon glyphicon-thumbs-down"></span>
 	<% end %>

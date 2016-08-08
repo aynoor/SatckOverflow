@@ -12,7 +12,7 @@ class Ability
         question.user_id != user.id
       end
       can [:upvote, :downvote], Answer do |answer|
-        answer.user.id != user.id
+        answer.user_id != user.id
       end
       can [:read, :create], [Question, Answer]
       can [:update, :destroy], Question, user_id: user.id 

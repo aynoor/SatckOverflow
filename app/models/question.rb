@@ -15,8 +15,4 @@ class Question < ActiveRecord::Base
     get_downvotes.size
   end
 
-  def destroy_votes
-    votes_for = 0
-  end
-
 end

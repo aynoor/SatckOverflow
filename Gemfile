@@ -23,14 +23,14 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '=3.4.1'
-gem 'bootstrap-sass'     
+gem 'bootstrap-sass'
 gem 'therubyracer'
 gem 'jquery-turbolinks'
 gem 'delayed_job_active_record'
 gem 'will_paginate',           '=3.0.7'
 gem 'cancancan', '=1.10'
 gem 'acts_as_votable', '=0.10.0'
-gem 'pry-rails', :group => :development
+gem 'pry-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

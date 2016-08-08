@@ -1,24 +1,21 @@
 <div class="jumbotron">
   <div class="container">
-   <div class="container">
-    <div class = "col-md-10">
-     <h3>Questions</h3>
-   </div> 
-   <div class = "col-md-2">
-     <% if can? :create, Question%>
-     <%= link_to "Ask Question", new_question_path, class: "btn btn-primary" %>
-     <% end %>
-   </div> 
- </div>
- <hr>
+    <div class="container">
+      <div class = "col-md-10">
+        <h3>Questions</h3>
+      </div> 
+      <div class = "col-md-2">
+        <% if can? :create, Question%>
+          <%= link_to "Ask Question", new_question_path, class: "btn btn-primary" %>
+        <% end %>
+      </div> 
+    </div>
+    <hr>
 
- <%= will_paginate %>
-
- <ul class = "pages">
-   <%= render @questions %>
- </ul>
-
- <%= will_paginate %>
-
-</div>
+    <%= will_paginate %>
+    <ul class = "pages">
+      <%= render @questions %>
+    </ul>
+    <%= will_paginate %>
+  </div>
 </div>

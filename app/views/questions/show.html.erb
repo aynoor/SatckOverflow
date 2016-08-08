@@ -4,7 +4,7 @@
   	<div class = "col-md-1">
   			<div class = "col-md-4">
           <% if can? :upvote, @question %>
-    				<%= link_to "", like_question_path(@question), method: :put, 
+    				<%= link_to "", upvote_question_path(@question), method: :put, 
     				 class: "glyphicon glyphicon-triangle-top", remote: true %>
           <% else %>
             <span class="glyphicon glyphicon-triangle-top"></span>
@@ -15,7 +15,7 @@
   			</div>
   			<div class = "col-md-4">
           <% if can? :downvote, @question %>
-            <%= link_to "", dislike_question_path(@question), method: :put, 
+            <%= link_to "", downvote_question_path(@question), method: :put, 
              class: "glyphicon glyphicon-triangle-bottom", remote: true %>
           <% else %>
             <span class="glyphicon glyphicon-triangle-bottom"></span>
@@ -46,7 +46,7 @@
   	</div>
   </div>
   <hr>
-  <div class = "container">
+  <div class = "container", id = "answers">
     <h4> <%= pluralize(@question.answers.count, "Answer") %> </h4>
     <%= render partial: '/answers/index' %>
   </div>
