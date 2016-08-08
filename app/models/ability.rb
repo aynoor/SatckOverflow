@@ -5,22 +5,18 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
-    #if user.nil?
-     # can :read, :all  
-    #else
-      if user.admin?
-        can :manage, :all
-      else
-        can [:upvote, :downvote], Question do |question|
-            question.user_id != user.id
-        end
-        can [:upvote, :downvote], Answer do |answer|
-            answer.user.id != user.id
-        end
-        can :read, [Question, Answer]
-        can :create, [Question, Answer]
-        can [:update, :destroy], Question, user_id: user.id 
+    if user.admin?
+      can :manage, :all
+    else
+      can [:upvote, :downvote], Question do |question|
+        question.user_id != user.id
       end
+      can [:upvote, :downvote], Answer do |answer|
+        answer.user.id != user.id
+      end
+      can [:read, :create], [Question, Answer]
+      can [:update, :destroy], Question, user_id: user.id 
+    end
     #end
     #
     # The first argument to `can` is the action you are giving the user
