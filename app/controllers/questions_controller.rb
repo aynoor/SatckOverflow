@@ -3,11 +3,11 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @questions = @questions.paginate(page: params[:page], per_page: 10)
+    @questions = @questions.paginate(page: params[:page], per_page: 10).order('answers_count DESC')
   end
 
   def show
-    @answers = @question.answers.paginate(page: params[:page], per_page: 5)
+    @answers = @question.answers.paginate(page: params[:page], per_page: 5).order('upvotes_count DESC')
   end
 
   def new
