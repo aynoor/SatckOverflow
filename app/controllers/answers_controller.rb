@@ -28,7 +28,6 @@ class AnswersController < ApplicationController
 
   # /questions/:question_id/answers/:id/upvote
   def upvote
-    #@answer = Answer.find(params[:id])
     @answer.upvote_by current_user
     @answer.update_attribute(:upvotes_count, @answer.total_upvotes)
     respond_to do |format|
@@ -38,7 +37,6 @@ class AnswersController < ApplicationController
 
   # /questions/:question_id/answers/:id/downvote
   def downvote
-    #@answer = Answer.find(params[:id])
     @answer.downvote_by current_user
     respond_to do |format|
       format.js   { render :layout => false }
