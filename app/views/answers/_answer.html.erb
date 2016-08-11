@@ -1,0 +1,20 @@
+<div class="container">
+	<% if can? :upvote, answer %>
+		<%= link_to "", upvote_question_answer_path(answer.question, answer), method: :put, class: "glyphicon glyphicon-thumbs-up", remote: true %>
+	<% else %>
+		<span class="glyphicon glyphicon-thumbs-up"></span>
+	<% end %>
+	<span id =  <%= "upvotes_ans_" + answer.id.to_s %> > 
+		<%= answer.total_upvotes %>
+	</span>
+	<% if can? :downvote, answer %>
+		<%= link_to "", downvote_question_answer_path(answer.question, answer), method: :put, class: "glyphicon glyphicon-thumbs-down", remote: true %>
+	<% else %>
+		<span class="glyphicon glyphicon-thumbs-down"></span>
+	<% end %>
+	<span id = <%= "downvotes_ans_" + answer.id.to_s %> >
+		<%= answer.total_downvotes %>
+	</span>
+	<p> <%= answer.content %> </p>
+	<p id = "author_name"> by <%= answer.user.name %> </p>
+</div>

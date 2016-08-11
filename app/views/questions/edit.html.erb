@@ -1,18 +1,4 @@
 <% provide(:title, "Edit question") %>
 <h1>Update your question</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@question) do |f| %>
-      <%= render 'shared/error_messages' %>
-
-      <%= f.label :description %>
-      <%= f.text_field :description, class: 'form-control' %>
-
-      <%= f.label :explanation %>
-      <%= f.text_area :explanation, cols: "30", rows: "7", class: 'form-control' %>
-
-      <%= f.submit "Save changes", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
+<%= render partial: 'form' %>

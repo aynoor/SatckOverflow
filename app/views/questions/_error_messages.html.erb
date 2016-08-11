@@ -1,4 +1,4 @@
-<% if @question.errors.any? %>
+<% if @question.errors.any? %>  
   <div id="error_explanation">
     <div class="alert alert-danger">
       The form contains <%= pluralize(@question.errors.count, "error") %>.

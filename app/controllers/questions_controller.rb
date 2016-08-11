@@ -1,21 +1,21 @@
 class QuestionsController < ApplicationController
+  skip_before_filter :authenticate_user!, only: [:index, :show]
+  
+  load_and_authorize_resource
 
+  # /questions
   def index
-    @questions = Question.paginate(page: params[:page], per_page: 10)
+    @questions = @questions.paginate(page: params[:page], per_page: 10).order('answers_count DESC')
   end
 
+  # /questions/:id
   def show
-    @question = Question.find(params[:id])
+    @answers = @question.answers.paginate(page: params[:page], per_page: 5).order('upvotes_count DESC')
   end
 
-  def new
-    @question = Question.new  
-    authorize! :new, @question
-  end
-
+  # /questions
   def create
-    @question = Question.new(question_params)
-    @question.user_id = current_user.id
+    @question = current_user.questions.build(question_params)
     if @question.save
       flash[:success] = "Question posted."
       redirect_to @question
@@ -24,13 +24,8 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def edit
-    @question = Question.find(params[:id])
-    authorize! :update, @question
-  end
-
+  # /questions/:id
   def update
-    @question = Question.find(params[:id])
     if @question.update_attributes(question_params)
       flash[:success] = "Quetion updated!"
       redirect_to @question
@@ -39,26 +34,26 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # /questions/:id
   def destroy
-    @question = Question.find(params[:id])
-    authorize! :destroy, @question
-    Question.find(params[:id]).destroy
-    flash[:success] = "Question deleted"
-    redirect_to root_url
+    if @question.destroy
+      flash[:success] = "Question deleted"
+      redirect_to root_url
+    else 
+      redirect_to @question
+    end
   end
 
+  # /questions/:id/upvote
   def upvote
-    @question = Question.find(params[:id])
-    authorize! :upvote, @question
     @question.upvote_by current_user
     respond_to do |format|
       format.js   { render :layout => false }
     end
   end
 
+  # /questions/:id/downvote
   def downvote
-    @question = Question.find(params[:id])
-    authorize! :downvote, @question
     @question.downvote_by current_user
     respond_to do |format|
       format.js   { render :layout => false }
@@ -66,7 +61,7 @@ class QuestionsController < ApplicationController
   end
 
   private
-
+ 
   def question_params
     params.require(:question).permit(:description, :explanation)
   end

@@ -1,9 +1,22 @@
-<li>
-	<%= link_to question.description, question %>
-	<% if can? :update, question %>
-    |  <%= link_to "edit", edit_question_path(question.id) %>
-  <% end %>
-  
-</li>
+<div class = "container">
+	<li>
+		<div class = "container">
+			<div class = "col-md-1">
+				<div id = "answer_count" > 
+					<%= pluralize(question.answers.count, "answer") %>
+				</div>
+			</div>
+			<div class = "col-md-11">
+				<div id = "question_description">
+					<%= link_to question.description, question %>
+					<% if can? :update, question %>
+    				|  <%= link_to "edit", edit_question_path(question.id) %>
+  				<% end %>
+				</div>
+			</div>
+		</div>
+	</li>
+</div>
 
-<!-- why question and not @question? -->
+
+
